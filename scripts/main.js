@@ -134,7 +134,7 @@ const populateCustomerFields = (selectedCustomer) => {
     const customerAddressLine = document.getElementById("customer-address-line");
     const customerAddressZipCode = document.getElementById("customer-address-zipcode");
     const customerAddressCity = document.getElementById("customer-address-city");
-    
+
     if (selectedCustomer) {
         customerNameElement.innerHTML = selectedCustomer.name;
         customerAddressLine.innerHTML = selectedCustomer.addressLine;
@@ -185,6 +185,21 @@ const handleSelectOrganization = (organizationId) => {
     });
     populateOrganizationFields(selectedOrganization);
     resetOrganizationReferenceSelect();
+    
+    if (!selectedOrganization?.references?.length) {
+        selectedOrganization.references = [
+            {
+                id: "1",
+                name: selectedOrganization.name,
+                addressCity: selectedOrganization.addressCity,
+                addressLine: selectedOrganization.addressLine,
+                addressZipCode: selectedOrganization.addressZipCode
+            }
+        ];
+        handleSelectOrganizationReference("1");
+        const selectOrganizationReferenceElement = document.getElementById("select-organization-reference");
+        selectOrganizationReferenceElement.value = "1";
+    }
     populateOrganizationReferenceSelect(selectedOrganization);
     autoSetInvoiceNumberInput(selectedOrganization);
 };
@@ -202,6 +217,20 @@ const handleSelectCustomer = (customerId) => {
     });
     populateCustomerFields(selectedCustomer);
     resetCustomerReferenceSelect();
+    if (!selectedCustomer?.references?.length) {
+        selectedCustomer.references = [
+            {
+                id: "1",
+                name: selectedCustomer.name,
+                addressCity: selectedCustomer.addressCity,
+                addressLine: selectedCustomer.addressLine,
+                addressZipCode: selectedCustomer.addressZipCode
+            }
+        ];
+        handleSelectCustomerReference("1");
+        const selectCustomerReferenceElement = document.getElementById("select-customer-reference");
+        selectCustomerReferenceElement.value = "1";
+    }
     populateCustomerReferenceSelect(selectedCustomer);
 };
 
@@ -244,7 +273,7 @@ const handleCheckboxSubjectToVat = (checked) => {
     subjectToVat = checked;
     renderInvoiceLines();
     updateVatAmount();
-}
+};
 /*-----------------------------*/
 
 const autoSetDateInputs = () => {
