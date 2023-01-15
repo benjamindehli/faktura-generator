@@ -177,26 +177,39 @@ const updateNetAmount = () => {
     }
 };
 
-const createVatSummaryLineElement = (subjectToVat, vatAmountGroup, vatRateInfo) => {
+const createVatSummaryLineElementForSubjectToVat = (subjectToVat, vatAmountGroup, vatRateInfo) => {
     const rowElement = document.createElement("tr");
     rowElement.classList.add("text-small");
     rowElement.classList.add("text-dark-gray");
-    if (subjectToVat) {
-        const vatAmountName = vatRateInfo.name;
-        const vatAmountBase = vatAmountGroup.base;
-        const vatAmountTotal = vatAmountGroup.total;
+    const vatNameTdElement = document.createElement("td");
+    const vatBaseTdElement = document.createElement("td");
+    const vatAmountTdElement = document.createElement("td");
 
-        const vatNameTdElement = document.createElement("td");
-        vatNameTdElement.innerText = vatAmountName;
-        const vatBaseTdElement = document.createElement("td");
-        vatBaseTdElement.innerText = vatAmountBase;
-        const vatAmountTdElement = document.createElement("td");
-        vatAmountTdElement.innerText = vatAmountTotal;
+    const vatAmountName = vatRateInfo.name;
+    const vatAmountBase = vatAmountGroup.base;
+    const vatAmountTotal = vatAmountGroup.total;
+    vatNameTdElement.innerText = vatAmountName;
+    vatBaseTdElement.innerText = vatAmountBase;
+    vatAmountTdElement.innerText = vatAmountTotal;
+    rowElement.appendChild(vatNameTdElement);
+    rowElement.appendChild(vatBaseTdElement);
+    rowElement.appendChild(vatAmountTdElement);
+    return rowElement;
+};
 
-        rowElement.appendChild(vatNameTdElement);
-        rowElement.appendChild(vatBaseTdElement);
-        rowElement.appendChild(vatAmountTdElement);
-    }
+const createVatSummaryLineElementForNotSubjectToVat = (netAmount) => {
+    const rowElement = document.createElement("tr");
+    rowElement.classList.add("text-small");
+    rowElement.classList.add("text-dark-gray");
+    const vatNameTdElement = document.createElement("td");
+    const vatBaseTdElement = document.createElement("td");
+    const vatAmountTdElement = document.createElement("td");
+    vatNameTdElement.innerText = "0%";
+    vatBaseTdElement.innerText = netAmount;
+    vatAmountTdElement.innerText = "0,00";
+    rowElement.appendChild(vatNameTdElement);
+    rowElement.appendChild(vatBaseTdElement);
+    rowElement.appendChild(vatAmountTdElement);
     return rowElement;
 };
 
@@ -216,11 +229,17 @@ const updateVatAmount = () => {
                 const vatRateInfo = vatRatesInfo.find((vatRateInfo) => {
                     return vatRateInfo.id === vatAmountKey;
                 });
-                const vatSummaryLineElement = createVatSummaryLineElement(subjectToVat, vatAmountGroup, vatRateInfo);
+                const vatSummaryLineElement = createVatSummaryLineElementForSubjectToVat(
+                    subjectToVat,
+                    vatAmountGroup,
+                    vatRateInfo
+                );
                 vatSummaryLinesElement.appendChild(vatSummaryLineElement);
             });
     } else {
-        vatAmountElement.innerText = "0,00";
+        const netAmount = calculateNetAmount();
+        const vatSummaryLineElement = createVatSummaryLineElementForNotSubjectToVat(netAmount);
+        vatSummaryLinesElement.appendChild(vatSummaryLineElement);
     }
 };
 
