@@ -1,0 +1,387 @@
+html {
+    margin: 0;
+    padding: 0;
+}
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa;
+    background: #d7d7d9;
+}
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.page input::-webkit-outer-spin-button,
+.page input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.page input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+table {
+    border-spacing: 0;
+}
+
+h1 {
+    font-size: 22px;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+hr {
+    border-top: 2px solid #ddd;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    margin: 0;
+}
+
+dl dt {
+    display: inline-block;
+}
+
+dl dd {
+    margin-inline-start: 0;
+}
+
+.page input {
+    width: 100%;
+    height: 26px;
+    padding: 0;
+    font-weight: 400;
+    color: #000;
+    background-color: transparent;
+    box-shadow: none;
+    font-family: Helvetica, Arial, sans-serif;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid #ddd;
+    text-align: inherit;
+    font-size: inherit;
+}
+
+.page input:focus-visible {
+    outline-offset: 2px;
+}
+
+.page input.message {
+    margin: 30px 0 40px -4px;
+}
+
+.page input.has-addon {
+    padding-right: 9.78px;
+}
+
+.page input + .addon {
+    position: absolute;
+    top: 8px;
+    right: 2px;
+}
+
+.page select {
+    height: 26px;
+    font-weight: 400;
+    color: #000;
+    font-family: Helvetica, Arial, sans-serif;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid #ddd;
+    text-align: inherit;
+    font-size: inherit;
+    appearance: none;
+}
+
+.page select:focus-visible {
+    outline-offset: 2px;
+}
+
+.page select.invoice-line-vat-rate {
+    width: 58.5px;
+}
+
+.page select.invoice-line-vat-rate:disabled {
+    opacity: 1;
+}
+
+.page-container {
+    margin: 0 0 0 300px;
+}
+
+.page {
+    position: relative;
+    margin: 0 auto 20px;
+    padding: 45px 0 50px 0;
+    border-radius: 0;
+    border-top: 1px solid #bbb;
+    border-right: 1px solid #888;
+    border-bottom: 1px solid #888;
+    border-left: 1px solid #aaa;
+    color: #000;
+    background: #fff;
+    font-family: Helvetica, Arial, sans-serif;
+    width: 210mm;
+    height: 297mm;
+    box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+}
+
+.page-padding {
+    padding: 0 50px;
+}
+
+.text-black {
+    color: #000;
+}
+
+.text-dark-gray {
+    color: #222;
+}
+
+.text-gray {
+    color: #444;
+}
+
+.text-light-gray {
+    color: #555;
+}
+
+.text-red {
+    color: #f00;
+}
+
+.text-bold {
+    font-weight: 900;
+}
+
+.text-semi-bold {
+    font-weight: 700;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.text-large {
+    font-size: 16px;
+}
+
+.text-medium {
+    font-size: 13px;
+}
+
+.text-small {
+    font-size: 11px;
+}
+
+.text-italic {
+    font-style: italic;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 36px;
+    width: 100%;
+}
+
+.flex-item.size-1-2 {
+    width: 50%;
+}
+
+.flex-item.size-1-3 {
+    width: 33.3333333%;
+}
+
+.flex-item.size-2-3 {
+    width: 66.6666666%;
+}
+
+.page-header .page-header-item .logo {
+    max-width: 240px;
+    max-height: 87px;
+}
+
+.page-header .page-header-item .customer {
+    padding: 15px 0 11px;
+    margin-top: 10px;
+    width: 418px;
+    position: relative;
+}
+
+.page-header .page-header-item .customer p {
+    line-height: 18px;
+    margin-bottom: 0;
+    margin-top: 0;
+    word-break: break-word;
+    font-size: 13px;
+}
+
+.page-header .page-header-item .heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.page-header .page-header-item .heading p.pageno {
+    font-size: 11px;
+    margin-bottom: 0;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: unset;
+}
+
+.page-header .page-header-item .heading h1 {
+    letter-spacing: normal;
+    margin: 0;
+}
+
+.page-header .page-header-item .org-info {
+    margin-bottom: 8px;
+}
+
+.page-header .page-header-item .org-info .name {
+    letter-spacing: normal;
+    margin-top: 10px;
+    word-break: break-word;
+    margin: 10px 0 0;
+}
+
+.page-header .page-header-item .org-info .address,
+.page-header .page-header-item .org-info .place {
+    display: block;
+    -webkit-font-smoothing: subpixel-antialiased;
+    line-height: 21px;
+    border: 0;
+    font-family: inherit;
+    font-style: normal;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+}
+
+.page-header .page-header-item .org-details {
+    margin-top: 4px;
+    line-height: 14px;
+    margin-bottom: 4px;
+    text-shadow: none;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.page-header .page-header-item .invoice-info {
+    column-gap: 14px;
+}
+
+.page-header .page-header-item .invoice-info dl {
+    margin: 4px 0;
+}
+
+.page-header .page-header-item .invoice-info dl dd {
+    float: right;
+}
+
+table.invoice-lines th {
+    margin-bottom: 0;
+}
+
+table.invoice-lines td {
+    position: relative;
+}
+
+.invoice-lines-summary {
+}
+
+.invoice-lines-summary table {
+    width: 100%;
+}
+
+.invoice-lines-summary dl {
+    margin: 0;
+    line-height: 20px;
+}
+
+.invoice-lines-summary dl dt {
+    width: 50%;
+}
+
+.invoice-lines-summary dl dd {
+    width: 50%;
+    text-align: right;
+    float: right;
+}
+
+.payment-info {
+}
+
+.payment-info .payment-info-legal {
+    line-height: 14px;
+    width: 580px;
+    margin-bottom: 15px;
+}
+
+.payment-info h2 {
+    margin-bottom: 15px;
+    margin-top: 0;
+}
+
+.payment-info h2:after {
+    content: "";
+    background: #fffcac;
+    height: 16px;
+    width: 437px;
+    float: right;
+}
+
+.payment-info p {
+    margin: 0;
+}
+
+.payment-info dl {
+    margin-top: 0;
+    margin-bottom: 16px;
+    max-width: 300px;
+}
+.payment-info dl dt {
+    width: 110px;
+}
+
+.payment-info dl dd {
+    display: inline-block;
+}
+
+footer {
+    position: absolute;
+    bottom: 115px;
+    width: inherit;
+}
+
+footer .footer-text {
+    margin-top: 5px;
+}
+
+footer .footer-text .separator {
+}

@@ -1,0 +1,25 @@
+@page {
+    size: A4;
+    margin: 0;
+}
+
+@media print {
+    html,
+    body {
+        width: 210mm;
+        min-height: 297mm;
+    }
+    .page-container {
+        margin: 0;
+    }
+    .page {
+        margin: 0;
+        border: none;
+        border-radius: initial;
+        box-shadow: initial;
+        page-break-after: always;
+    }
+    .options {
+        display: none;
+    }
+}
