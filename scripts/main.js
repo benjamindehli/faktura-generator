@@ -124,9 +124,9 @@ const populateOrganizationFields = (selectedOrganization) => {
 
 const populateOrganizationReferenceFields = (selectedOrganizationReference) => {
     const organizationReferenceNameElement = document.getElementById("organization-reference-name");
-    if (selectedOrganizationReference?.name?.length) {
-        organizationReferenceNameElement.innerHTML = selectedOrganizationReference.name;
-    }
+    organizationReferenceNameElement.innerHTML = selectedOrganizationReference?.name?.length
+        ? selectedOrganizationReference.name
+        : "";
 };
 
 const populateCustomerFields = (selectedCustomer) => {
@@ -148,12 +148,10 @@ const populateCustomerReferenceFields = (selectedCustomerReference) => {
     const customerReferenceAddressLineElement = document.getElementById("customer-reference-address-line");
     const customerReferenceZipCodeElement = document.getElementById("customer-reference-zip-code");
     const customerReferenceCityElement = document.getElementById("customer-reference-city");
-    if (!!selectedCustomerReference) {
-        customerReferenceNameElement.innerHTML = selectedCustomerReference?.name || "";
-        customerReferenceAddressLineElement.innerHTML = selectedCustomerReference?.addressLine || "";
-        customerReferenceZipCodeElement.innerHTML = selectedCustomerReference?.addressZipCode || "";
-        customerReferenceCityElement.innerHTML = selectedCustomerReference?.addressCity || "";
-    }
+    customerReferenceNameElement.innerHTML = selectedCustomerReference?.name || "";
+    customerReferenceAddressLineElement.innerHTML = selectedCustomerReference?.addressLine || "";
+    customerReferenceZipCodeElement.innerHTML = selectedCustomerReference?.addressZipCode || "";
+    customerReferenceCityElement.innerHTML = selectedCustomerReference?.addressCity || "";
 };
 
 const populateDeliveryDateField = (deliveryDateString) => {
@@ -184,8 +182,12 @@ const handleSelectOrganization = (organizationId) => {
         return organization.id === organizationId;
     });
     populateOrganizationFields(selectedOrganization);
+
+    // Reset fields
+    selectedOrganizationReference = null;
     resetOrganizationReferenceSelect();
-    
+    populateOrganizationReferenceFields(selectedOrganizationReference);
+
     if (!selectedOrganization?.references?.length) {
         selectedOrganization.references = [
             {
@@ -216,7 +218,12 @@ const handleSelectCustomer = (customerId) => {
         return customer.id === customerId;
     });
     populateCustomerFields(selectedCustomer);
+
+    // Reset fields
+    selectedCustomerReference = null;
     resetCustomerReferenceSelect();
+    populateCustomerReferenceFields(selectedCustomerReference);
+
     if (!selectedCustomer?.references?.length) {
         selectedCustomer.references = [
             {
