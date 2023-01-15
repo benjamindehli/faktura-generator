@@ -56,8 +56,8 @@ dl dd {
     margin-inline-start: 0;
 }
 
-.page input {
-    width: 100%;
+.page input,
+.page select {
     height: 26px;
     padding: 0;
     font-weight: 400;
@@ -69,12 +69,25 @@ dl dd {
     border-left: 1px solid transparent;
     border-right: 1px solid transparent;
     border-bottom: 1px solid #ddd;
+    border-radius: 2px;
     text-align: inherit;
     font-size: inherit;
+    transition: background-color .25s cubic-bezier(.4,0,.2,1) 0ms;
+    appearance: none;
 }
 
-.page input:focus-visible {
+.page input:focus-visible:not(:read-only),
+.page select:focus-visible:not(:disabled) {
     outline-offset: 2px;
+}
+
+.page input:focus-visible:read-only,
+.page select:focus-visible:disabled {
+    outline: none;
+}
+
+.page input {
+    width: 100%;
 }
 
 .page input.message {
@@ -91,32 +104,18 @@ dl dd {
     right: 2px;
 }
 
-.page select {
-    height: 26px;
-    padding: 0;
-    font-weight: 400;
-    color: #000;
-    background: transparent;
-    font-family: "Roboto", Helvetica, Arial, sans-serif;
-    border-top: 1px solid transparent;
-    border-left: 1px solid transparent;
-    border-right: 1px solid transparent;
-    border-bottom: 1px solid #ddd;
-    text-align: inherit;
-    font-size: inherit;
-    appearance: none;
-}
-
-.page select:focus-visible {
-    outline-offset: 2px;
-}
-
 .page select.invoice-line-vat-rate {
-    width: 58.5px;
+    width: 67px;
 }
 
 .page select.invoice-line-vat-rate:disabled {
     opacity: 1;
+}
+
+.page input:hover:not(:focus-visible):not(:read-only):not(.disabled),
+.page select:hover:not(:focus-visible):not(:read-only):not(.disabled),
+.page select:hover:not(:focus-visible):not(:disabled) {
+    background-color: #f0f0f0;
 }
 
 .page-container {
