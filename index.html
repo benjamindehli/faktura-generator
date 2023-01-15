@@ -22,7 +22,7 @@
                 onchange="handleSelectOrganizationReference(event.target.value)"
             ></select>
 
-            <label for="checkbox-subject-to-vat">Mumspliktig</label>
+            <label for="checkbox-subject-to-vat">MVA-pliktig</label>
             <input
                 id="checkbox-subject-to-vat"
                 type="checkbox"
@@ -124,7 +124,7 @@
                         </thead>
                         <tbody id="invoice-lines"></tbody>
                     </table>
-                    <button onclick="addInvoiceLine()"></button>
+                    <button onclick="addInvoiceLine()" class="hidden-from-print">Legg til linje</button>
                     <div class="flex-container invoice-lines-summary">
                         <div class="flex-item size-1-2">
                             <table>
