@@ -237,6 +237,7 @@ const updateVatAmount = () => {
                 vatSummaryLinesElement.appendChild(vatSummaryLineElement);
             });
     } else {
+        vatAmountElement.innerText = "0,00";
         const netAmount = calculateNetAmount();
         const vatSummaryLineElement = createVatSummaryLineElementForNotSubjectToVat(netAmount);
         vatSummaryLinesElement.appendChild(vatSummaryLineElement);
