@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="page.css" rel="stylesheet" />
+        <link href="options.css" rel="stylesheet" />
+        <link href="print.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,900" rel="stylesheet" />
+        <title>Faktura</title>
+    </head>
+    <body>
+        <div class="options">
+            <label for="select-organization">Foretak</label>
+            <select id="select-organization" onchange="handleSelectOrganization(event.target.value)"></select>
+
+            <label for="select-organization-reference">Foretakets kontaktperson</label>
+            <select
+                id="select-organization-reference"
+                disabled
+                onchange="handleSelectOrganizationReference(event.target.value)"
+            ></select>
+
+            <label for="checkbox-subject-to-vat">Mumspliktig</label>
+            <input
+                id="checkbox-subject-to-vat"
+                type="checkbox"
+                name="subject-to-vat"
+                onchange="handleCheckboxSubjectToVat(event.target.checked)"
+            />
+
+            <label for="select-customer">Kunde</label>
+            <select id="select-customer" onchange="handleSelectCustomer(event.target.value)"></select>
+
+            <label for="select-customer-reference">Kundens kontaktperson</label>
+            <select
+                id="select-customer-reference"
+                disabled
+                onchange="handleSelectCustomerReference(event.target.value)"
+            ></select>
+
+            <label for="input-delivery-date">Leveringsdato</label>
+            <input id="input-delivery-date" type="date" onchange="handleInputDeliveryDate(event.target.value)" />
+
+            <label for="input-invoice-date">Fakturadato</label>
+            <input id="input-invoice-date" type="date" onchange="handleInputInvoiceDate(event.target.value)" />
+
+            <label for="input-due-date">Forfallsdato</label>
+            <input id="input-due-date" type="date" onchange="handleInputDueDate(event.target.value)" />
+
+            <label for="input-due-date">Fakturanummer</label>
+            <input id="input-invoice-number" type="number" onchange="handleInputInvoiceNumber(event.target.value)" />
+        </div>
+        <div class="page-container">
+            <div class="page">
+                <div class="page-header page-padding flex-container">
+                    <div class="page-header-item flex-item size-1-2">
+                        <img id="organization-logo" src="" class="logo" />
+
+                        <div class="customer" id="customer">
+                            <p id="customer-name" class="text-bold text-dark-gray">Fornavn Etternavn</p>
+                            <p id="customer-address-line">Adressevegen 1</p>
+                            <p><span id="customer-address-zipcode">1234</span> <span id="customer-address-city">POSTSTED</span></p>
+                        </div>
+                    </div>
+                    <div class="page-header-item flex-item size-1-2">
+                        <div class="heading">
+                            <p class="pageno text-dark-gray">Side 1 av 1</p>
+                            <h1 id="document-title" class="text-black text-semi-bold text-uppercase">Faktura</h1>
+                        </div>
+                        <hr />
+                        <div class="org-info">
+                            <span id="organization-info-name" class="name text-large text-black text-semi-bold"
+                                >Foretak</span
+                            >
+                            <span id="organization-info-address-line" class="address text-medium text-dark-gray"
+                                >Adresse</span
+                            >
+                            <span class="place text-medium text-dark-gray text-uppercase"
+                                ><span id="organization-info-address-zip-code">1234</span>
+                                <span id="organization-info-address-city">Poststed</span></span
+                            >
+                        </div>
+                        <hr />
+                        <div class="org-details text-small text-dark-gray">
+                            <div>Vår ref: <span id="organization-reference-name"></span></div>
+                            <div>Deres ref: <span id="customer-reference-name"></span></div>
+                            <div>Leveringsdato: <span id="delivery-date"></span></div>
+                            <div>
+                                Levert til: <span id="customer-reference-address-line"></span>,
+                                <span id="customer-reference-zip-code"></span>
+                                <span id="customer-reference-city" class="text-uppercase"></span>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="invoice-info flex-container">
+                            <dl class="flex-item text-medium size-1-2">
+                                <dt>Fakturadato:</dt>
+                                <dd id="invoice-date"></dd>
+                                <dt id="due-date-label">Forfallsdato:</dt>
+                                <dd id="due-date" class="text-red text-semi-bold"></dd>
+                            </dl>
+                            <dl class="flex-item text-medium size-1-2">
+                                <dt>Fakturanr.:</dt>
+                                <dd id="invoice-number">20190013</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-body page-padding">
+                    <div class="text-small">
+                        <input class="message" placeholder="Beskjed til mottakeren" />
+                    </div>
+                    <table class="invoice-lines">
+                        <thead>
+                            <tr class="text-small text-dark-gray text-semi-bold text-uppercase">
+                                <th class="text-align-left" width="363">Beskrivelse</th>
+                                <th class="text-align-right">Pris</th>
+                                <th class="text-align-right">Antall</th>
+                                <th class="text-align-right">Rabatt</th>
+                                <th class="text-align-right">MVA</th>
+                                <th class="text-align-right">Beløp</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoice-lines"></tbody>
+                    </table>
+                    <button onclick="addInvoiceLine()"></button>
+                    <div class="flex-container invoice-lines-summary">
+                        <div class="flex-item size-1-2">
+                            <table>
+                                <thead>
+                                    <tr class="text-small text-dark-gray text-semi-bold text-align-left">
+                                        <th>MVA-sats</th>
+                                        <th>Grunnlag</th>
+                                        <th>MVA</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="vat-summary-lines">
+                                    <tr class="text-small text-dark-gray">
+                                        <td>0 %</td>
+                                        <td>0,00</td>
+                                        <td>0,00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="flex-item size-1-2">
+                            <dl class="text-small text-dark-gray">
+                                <dt>Nettobeløp</dt>
+                                <dd id="net-amount">0,00</dd>
+                                <dt>Merverdiavgift</dt>
+                                <dd id="vat-amount">0,00</dd>
+                            </dl>
+                            <hr />
+                            <dl class="total text-medium text-dark-gray text-semi-bold text-uppercase">
+                                <dt id="invoice-total-label">Å betale</dt>
+                                <dd>0,00</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <footer class="page-padding">
+                    <div class="payment-info">
+                        <p
+                            id="payment-info-legal-text"
+                            class="payment-info-legal text-small text-italic text-dark-gray"
+                        >
+                            Ved betaling etter forfall kan det påløpe renter og gebyr etter statens satser.<br />Ved
+                            innsigelse vil kravet kunne bli sendt til forliksrådet, jf. tvistelovens § 5-2.
+                        </p>
+                        <h2 id="payment-info-title" class="text-semi-bold text-gray text-uppercase">
+                            Betalingsinformasjon
+                        </h2>
+
+                        <div class="flex-container">
+                            <div class="flex-item size-1-3">
+                                <dl class="text-medium">
+                                    <dt>Fakturanummer:</dt>
+                                    <dd>20190013</dd>
+                                    <dt>Beløp:</dt>
+                                    <dd>0,00</dd>
+                                    <dt>SWIFT:</dt>
+                                    <dd id="payment-info-swift">ABCDE123XXX</dd>
+                                </dl>
+                            </div>
+                            <div class="flex-item size-2-3">
+                                <p id="payment-info-instruction" class="text-medium text-black text-semi-bold">
+                                    Husk å merke betalingen med fakturanummer!
+                                </p>
+                                <dl id="bank-account-details" class="text-medium">
+                                    <dt>Bankkonto:</dt>
+                                    <dd id="payment-info-account-no">1234.56.78910</dd>
+                                    <dt>IBAN:</dt>
+                                    <dd id="payment-info-iban">NO1234567891011</dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <hr />
+                    </div>
+                    <div class="footer-text text-small">
+                        <span id="footer-organization-name" class="text-black text-semi-bold text-uppercase"
+                            >Foretak</span
+                        >
+                        <span class="separator">//</span>
+                        <span class="text-light-gray"
+                            >ORG.NR. <span id="footer-organization-number">123456789</span></span
+                        >
+                        <span class="separator">//</span>
+                        <span class="text-light-gray"
+                            >TELEFON: <span id="footer-organization-phone-number">12345678</span></span
+                        >
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="data/organization.js"></script>
+        <script src="data/customers.js"></script>
+        <script src="scripts/helpers.js"></script>
+        <script src="scripts/invoiceLine.js"></script>
+        <script src="scripts/main.js"></script>
+    </body>
+</html>
