@@ -280,6 +280,7 @@ const handleCheckboxSubjectToVat = (checked) => {
     subjectToVat = checked;
     renderInvoiceLines();
     updateVatAmount();
+    updateTotalAmount();
 };
 /*-----------------------------*/
 

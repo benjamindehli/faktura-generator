@@ -177,6 +177,14 @@ const updateNetAmount = () => {
     }
 };
 
+const updateTotalAmount = () => {
+    const totalAmount = calculateTotalAmount().toFixed(2);
+    const invoiceTotalElement = document.getElementById("invoice-total");
+    const paymentInfoInvoiceTotalElement = document.getElementById("payment-info-invoice-total");
+    invoiceTotalElement.innerText = totalAmount;
+    paymentInfoInvoiceTotalElement.innerText = totalAmount;
+}
+
 const createVatSummaryLineElementForSubjectToVat = (subjectToVat, vatAmountGroup, vatRateInfo) => {
     const rowElement = document.createElement("tr");
     rowElement.classList.add("text-small");
@@ -279,6 +287,7 @@ const handleInvoiceLinePriceChange = (value, index) => {
     updateInvoiceLineTotalElement(index);
     updateNetAmount();
     updateVatAmount();
+    updateTotalAmount();
 };
 
 const handleInvoiceLineQuantityChange = (value, index) => {
@@ -288,6 +297,7 @@ const handleInvoiceLineQuantityChange = (value, index) => {
     updateInvoiceLineTotalElement(index);
     updateNetAmount();
     updateVatAmount();
+    updateTotalAmount();
 };
 
 const handleInvoiceLineDicountChange = (value, index) => {
@@ -297,6 +307,7 @@ const handleInvoiceLineDicountChange = (value, index) => {
     updateInvoiceLineTotalElement(index);
     updateNetAmount();
     updateVatAmount();
+    updateTotalAmount();
 };
 
 const handleInvoiceLineVatChange = (vatRateId, index) => {
@@ -305,6 +316,7 @@ const handleInvoiceLineVatChange = (vatRateId, index) => {
     });
     setInvoiceLineVat(value, index);
     updateVatAmount();
+    updateTotalAmount();
 };
 
 const calculateInvoiceLineTotal = (invoiceLine) => {
@@ -361,6 +373,12 @@ const calculateVatAmount = () => {
     return vatAmountRounded;
 };
 
+const calculateTotalAmount = () => {
+    let netAmount = parseFloat(calculateNetAmount());
+    let vatAmount = subjectToVat ? parseFloat(calculateVatAmount().sum.total) : 0;
+    return netAmount + vatAmount;
+};
+
 const addInvoiceLine = () => {
     invoiceLines.push({
         description: "",
@@ -380,4 +398,5 @@ const removeInvoiceLine = (index) => {
     renderInvoiceLines();
     updateNetAmount();
     updateVatAmount();
+    updateTotalAmount();
 };
