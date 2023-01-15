@@ -169,7 +169,6 @@ const createVatSummaryLineElement = (subjectToVat, vatAmountGroup, vatRateInfo) 
     rowElement.classList.add("text-dark-gray");
     if (subjectToVat) {
         const vatAmountName = vatRateInfo.name;
-        const vatAmountRate = vatRateInfo.rate;
         const vatAmountBase = vatAmountGroup.base;
         const vatAmountTotal = vatAmountGroup.total;
 
@@ -183,16 +182,8 @@ const createVatSummaryLineElement = (subjectToVat, vatAmountGroup, vatRateInfo) 
         rowElement.appendChild(vatNameTdElement);
         rowElement.appendChild(vatBaseTdElement);
         rowElement.appendChild(vatAmountTdElement);
-        console.log({ vatAmountName, vatAmountRate, vatAmountBase, vatAmountTotal });
     }
     return rowElement;
-    /*
-                <tr class="text-small text-dark-gray">
-                                        <td>0 %</td>
-                                        <td>0,00</td>
-                                        <td>0,00</td>
-                                    </tr>
-                */
 };
 
 const updateVatAmount = () => {
@@ -214,7 +205,6 @@ const updateVatAmount = () => {
                 const vatSummaryLineElement = createVatSummaryLineElement(subjectToVat, vatAmountGroup, vatRateInfo);
                 vatSummaryLinesElement.appendChild(vatSummaryLineElement);
             });
-        console.log({ vatAmount });
     } else {
         vatAmountElement.innerText = "0,00";
     }
@@ -237,7 +227,6 @@ const setInvoiceLineDiscount = (value, index) => {
 };
 
 const setInvoiceLineVat = (value, index) => {
-    console.log("setInvoiceLineVat", { value, index });
     invoiceLines[index].vat = value;
 };
 
