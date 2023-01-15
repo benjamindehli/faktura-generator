@@ -9,6 +9,7 @@ body {
     padding: 0;
     background-color: #fafafa;
     background: #d7d7d9;
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
 }
 * {
     box-sizing: border-box;
@@ -63,7 +64,7 @@ dl dd {
     color: #000;
     background-color: transparent;
     box-shadow: none;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
     border-top: 1px solid transparent;
     border-left: 1px solid transparent;
     border-right: 1px solid transparent;
@@ -94,7 +95,7 @@ dl dd {
     height: 26px;
     font-weight: 400;
     color: #000;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
     border-top: 1px solid transparent;
     border-left: 1px solid transparent;
     border-right: 1px solid transparent;
@@ -131,7 +132,7 @@ dl dd {
     border-left: 1px solid #aaa;
     color: #000;
     background: #fff;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: "Roboto" Helvetica, Arial, sans-serif;
     width: 210mm;
     height: 297mm;
     box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
