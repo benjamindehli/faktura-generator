@@ -93,8 +93,10 @@ dl dd {
 
 .page select {
     height: 26px;
+    padding: 0;
     font-weight: 400;
     color: #000;
+    background: transparent;
     font-family: "Roboto", Helvetica, Arial, sans-serif;
     border-top: 1px solid transparent;
     border-left: 1px solid transparent;
