@@ -140,7 +140,7 @@ dl dd {
 }
 
 .page-padding {
-    padding: 0 50px;
+    padding: 0 50px 50px;
 }
 
 .text-black {
@@ -318,8 +318,6 @@ table.invoice-lines td.remove-invoice-line {
     position: absolute;
 }
 
-.invoice-lines-summary {
-}
 
 .invoice-lines-summary table {
     width: 100%;
@@ -340,8 +338,6 @@ table.invoice-lines td.remove-invoice-line {
     float: right;
 }
 
-.payment-info {
-}
 
 .payment-info .payment-info-legal {
     line-height: 14px;
@@ -381,13 +377,10 @@ table.invoice-lines td.remove-invoice-line {
 
 footer {
     position: absolute;
-    bottom: 115px;
+    bottom: 0;
     width: inherit;
 }
 
 footer .footer-text {
     margin-top: 5px;
-}
-
-footer .footer-text .separator {
 }
