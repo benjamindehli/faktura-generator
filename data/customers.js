@@ -331,19 +331,10 @@ const customers = [
     },
     {
         id: "39-885-8219",
-        name: "Franecki Group",
+        name: "Merci Gerry",
         addressCity: "Xinxian",
         addressLine: "16539 Miller Parkway",
-        addressZipCode: "2842",
-        references: [
-            {
-                id: "15-969-1300",
-                name: "Merci Gerry",
-                addressCity: "Nong Chik",
-                addressLine: "9896 Gulseth Center",
-                addressZipCode: "94170"
-            }
-        ]
+        addressZipCode: "2842"
     },
     {
         id: "00-664-6124",
@@ -991,19 +982,10 @@ const customers = [
     },
     {
         id: "29-239-1879",
-        name: "Tremblay Group",
+        name: "Avery Hortop",
         addressCity: "Tsuma",
         addressLine: "8 Dovetail Parkway",
-        addressZipCode: "881-0033",
-        references: [
-            {
-                id: "92-320-0792",
-                name: "Avery Hortop",
-                addressCity: "Santa Rosa",
-                addressLine: "88 Sutteridge Hill",
-                addressZipCode: "81132"
-            }
-        ]
+        addressZipCode: "881-0033"
     },
     {
         id: "65-973-3883",

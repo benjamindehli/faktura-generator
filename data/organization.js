@@ -75,6 +75,7 @@ const organizations = [
         invoiceStartNo: 87138572,
         addressCity: "Ciampea",
         addressLine: "00583 Little Fleur Road",
+        addressZipCode: "5790",
         logoFileName: "cristian-grumell.png"
     },
     {
