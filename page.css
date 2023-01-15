@@ -312,6 +312,10 @@ table.invoice-lines td {
     position: relative;
 }
 
+table.invoice-lines td.remove-invoice-line {
+    position: absolute;
+}
+
 .invoice-lines-summary {
 }
 

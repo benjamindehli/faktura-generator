@@ -135,6 +135,20 @@ const createInvoiceLineElement = (index, invoiceLine) => {
     rowElement.appendChild(vatTdElement);
     rowElement.appendChild(totalTdElement);
 
+    if (invoiceLines.length > 1) {
+        // Remove line button
+        const removeLineTdElement = document.createElement("td");
+        removeLineTdElement.classList.add("hidden-from-print");
+        removeLineTdElement.classList.add("remove-invoice-line");
+        const removeLineButtonElement = document.createElement("button");
+        removeLineButtonElement.innerText = "✕";
+        removeLineButtonElement.onclick = () => removeInvoiceLine(index);
+
+        removeLineTdElement.appendChild(removeLineButtonElement);
+
+        rowElement.appendChild(removeLineTdElement);
+    }
+
     return rowElement;
 };
 
@@ -339,4 +353,11 @@ const addInvoiceLine = () => {
         total: 0.0
     });
     renderInvoiceLines();
+};
+
+const removeInvoiceLine = (index) => {
+    invoiceLines.splice(index, 1);
+    renderInvoiceLines();
+    updateNetAmount();
+    updateVatAmount();
 };
