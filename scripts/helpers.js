@@ -32,3 +32,7 @@ const createPlaceholderOptionElement = (placeholderText) => {
     placeholderOptionElement.innerText = placeholderText;
     return placeholderOptionElement;
 }
+
+const addDigitGrouping = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+};
