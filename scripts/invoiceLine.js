@@ -56,14 +56,37 @@ const createInvoiceLineElement = (index, invoiceLine) => {
     const priceTdElement = document.createElement("td");
     priceTdElement.classList.add("text-align-right");
     const priceInputElement = document.createElement("input");
+    priceInputElement.classList.add("price");
+    priceInputElement.classList.add("hidden");
     priceInputElement.type = "number";
     priceInputElement.step = ".01";
     priceInputElement.placeholder = "0,00";
     priceInputElement.value = invoiceLine?.price || "";
+
+    const priceInputPreviewElement = document.createElement("span");
+    priceInputPreviewElement.classList.add("text-align-right");
+    priceInputPreviewElement.classList.add("input");
+    priceInputPreviewElement.classList.add("price");
+    priceInputPreviewElement.innerText = addDigitGrouping(parseFloat(invoiceLine?.price || 0).toFixed(2)).replace(
+        ".",
+        ","
+    );
+    priceInputPreviewElement.onclick = () => {
+        priceInputElement.classList.remove("hidden");
+        priceInputElement.focus();
+        priceInputPreviewElement.classList.add("hidden");
+    };
+
     priceInputElement.onkeyup = (event) => handleInvoiceLinePriceChange(event.target.value, index);
     priceInputElement.onblur = (event) => {
-        priceInputElement.value = parseFloat(event.target.value).toFixed(2);
+        const inputValue = parseFloat(event.target.value || 0).toFixed(2);
+        priceInputElement.value = inputValue;
+        priceInputPreviewElement.innerText = addDigitGrouping(inputValue).replace(".", ",");
+        priceInputElement.classList.add("hidden");
+        priceInputPreviewElement.classList.remove("hidden");
     };
+
+    priceTdElement.appendChild(priceInputPreviewElement);
     priceTdElement.appendChild(priceInputElement);
 
     // Quantity
@@ -121,10 +144,12 @@ const createInvoiceLineElement = (index, invoiceLine) => {
     // Total
     const totalTdElement = document.createElement("td");
     totalTdElement.classList.add("text-align-right");
-    const totalInputElement = document.createElement("input");
+    const totalInputElement = document.createElement("span");
+    totalInputElement.classList.add("total");
+    totalInputElement.classList.add("input");
     totalInputElement.id = `invoice-line-total-${index}`;
     totalInputElement.type = "number";
-    totalInputElement.value = parseFloat(invoiceLine?.total || 0).toFixed(2);
+    totalInputElement.innerText = addDigitGrouping(parseFloat(invoiceLine?.total || 0).toFixed(2)).replace(".", ",");
     totalInputElement.readOnly = true;
     totalTdElement.appendChild(totalInputElement);
 
@@ -163,13 +188,13 @@ const renderInvoiceLines = () => {
 
 const updateInvoiceLineTotalElement = (index) => {
     const invoiceLineTotalElement = document.getElementById(`invoice-line-total-${index}`);
-    invoiceLineTotalElement.value = invoiceLines[index].total;
+    invoiceLineTotalElement.innerText = addDigitGrouping(invoiceLines[index].total).replace(".", ",");
 };
 
 const updateNetAmount = () => {
     const netAmountElement = document.getElementById("net-amount");
     const netAmount = calculateNetAmount();
-    netAmountElement.innerText = netAmount;
+    netAmountElement.innerText = addDigitGrouping(netAmount).replace(".", ",");
     if (netAmount < 0) {
         setDocumentType("creditNote");
     } else {
@@ -178,12 +203,12 @@ const updateNetAmount = () => {
 };
 
 const updateTotalAmount = () => {
-    const totalAmount = calculateTotalAmount().toFixed(2);
+    const totalAmount = addDigitGrouping(parseFloat(calculateTotalAmount() || 0).toFixed(2)).replace(".", ",");
     const invoiceTotalElement = document.getElementById("invoice-total");
     const paymentInfoInvoiceTotalElement = document.getElementById("payment-info-invoice-total");
     invoiceTotalElement.innerText = totalAmount;
     paymentInfoInvoiceTotalElement.innerText = totalAmount;
-}
+};
 
 const createVatSummaryLineElementForSubjectToVat = (subjectToVat, vatAmountGroup, vatRateInfo) => {
     const rowElement = document.createElement("tr");
@@ -193,12 +218,16 @@ const createVatSummaryLineElementForSubjectToVat = (subjectToVat, vatAmountGroup
     const vatBaseTdElement = document.createElement("td");
     const vatAmountTdElement = document.createElement("td");
 
+    vatNameTdElement.classList.add("text-align-left");
+    vatBaseTdElement.classList.add("text-align-right");
+    vatAmountTdElement.classList.add("text-align-right");
+
     const vatAmountName = vatRateInfo.name;
     const vatAmountBase = vatAmountGroup.base;
     const vatAmountTotal = vatAmountGroup.total;
     vatNameTdElement.innerText = vatAmountName;
-    vatBaseTdElement.innerText = vatAmountBase;
-    vatAmountTdElement.innerText = vatAmountTotal;
+    vatBaseTdElement.innerText = addDigitGrouping(vatAmountBase).replace(".", ",");
+    vatAmountTdElement.innerText = addDigitGrouping(vatAmountTotal).replace(".", ",");
     rowElement.appendChild(vatNameTdElement);
     rowElement.appendChild(vatBaseTdElement);
     rowElement.appendChild(vatAmountTdElement);
@@ -212,8 +241,13 @@ const createVatSummaryLineElementForNotSubjectToVat = (netAmount) => {
     const vatNameTdElement = document.createElement("td");
     const vatBaseTdElement = document.createElement("td");
     const vatAmountTdElement = document.createElement("td");
+
+    vatNameTdElement.classList.add("text-align-left");
+    vatBaseTdElement.classList.add("text-align-right");
+    vatAmountTdElement.classList.add("text-align-right");
+
     vatNameTdElement.innerText = "0%";
-    vatBaseTdElement.innerText = netAmount;
+    vatBaseTdElement.innerText = addDigitGrouping(netAmount).replace(".", ",");
     vatAmountTdElement.innerText = "0,00";
     rowElement.appendChild(vatNameTdElement);
     rowElement.appendChild(vatBaseTdElement);
@@ -227,7 +261,7 @@ const updateVatAmount = () => {
     vatSummaryLinesElement.innerHTML = "";
     if (subjectToVat) {
         const vatAmount = calculateVatAmount();
-        vatAmountElement.innerText = vatAmount.sum.total;
+        vatAmountElement.innerText = addDigitGrouping(vatAmount.sum.total).replace(".", ",");
         Object.keys(vatAmount)
             .filter((vatAmountKey) => {
                 return vatAmountKey !== "sum";

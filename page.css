@@ -56,6 +56,12 @@ dl dd {
     margin-inline-start: 0;
 }
 
+.hidden,
+.page input.hidden,
+.page .input.hidden {
+    display: none;
+}
+
 .page input,
 .page select {
     height: 26px;
@@ -66,13 +72,13 @@ dl dd {
     box-shadow: none;
     font-family: "Roboto", Helvetica, Arial, sans-serif;
     border-top: 1px solid transparent;
-    border-left: 1px solid transparent;
-    border-right: 1px solid transparent;
+    border-left: 0px solid transparent;
+    border-right: 0px solid transparent;
     border-bottom: 1px solid #ddd;
-    border-radius: 2px;
+    border-radius: 2px 2px 0 0;
     text-align: inherit;
     font-size: inherit;
-    transition: background-color .25s cubic-bezier(.4,0,.2,1) 0ms;
+    transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     appearance: none;
 }
 
@@ -91,11 +97,11 @@ dl dd {
 }
 
 .page input.message {
-    margin: 30px 0 40px -4px;
+    margin: 0 0 40px 0;
 }
 
 .page input.has-addon {
-    padding-right: 9.78px;
+    padding-right: 9px;
 }
 
 .page input + .addon {
@@ -114,7 +120,8 @@ dl dd {
 
 .page input:hover:not(:focus-visible):not(:read-only):not(.disabled),
 .page select:hover:not(:focus-visible):not(:read-only):not(.disabled),
-.page select:hover:not(:focus-visible):not(:disabled) {
+.page select:hover:not(:focus-visible):not(:disabled),
+.page .input:hover {
     background-color: #f0f0f0;
 }
 
@@ -318,9 +325,40 @@ table.invoice-lines td.remove-invoice-line {
     position: absolute;
 }
 
+table.invoice-lines td input.price,
+table.invoice-lines td span.price {
+    width: 75px;
+}
+
+table.invoice-lines td span.total {
+    width: 75px;
+}
+
+table.invoice-lines td span.input {
+    border-top: 1px solid transparent;
+    border-left: 0px solid transparent;
+    border-right: 0px solid transparent;
+    border-bottom: 1px solid #ddd;
+    border-radius: 2px 2px 0 0;
+    padding: 6px 0;
+    height: 26px;
+    display: inline-block;
+    text-wrap: nowrap;
+    transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
 
 .invoice-lines-summary table {
     width: 100%;
+}
+
+.invoice-lines-summary table th:first-of-type,
+.invoice-lines-summary table td:first-of-type {
+    width: 20%;
+}
+
+.invoice-lines-summary table th:not(:first-of-type),
+.invoice-lines-summary table td:not(:first-of-type) {
+    width: 40%;
 }
 
 .invoice-lines-summary dl {
@@ -337,7 +375,6 @@ table.invoice-lines td.remove-invoice-line {
     text-align: right;
     float: right;
 }
-
 
 .payment-info .payment-info-legal {
     line-height: 14px;
