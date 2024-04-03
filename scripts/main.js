@@ -171,7 +171,9 @@ const populateDueDateField = (dueDateString) => {
 
 const populateInvoiceNumberField = (invoiceNumberString) => {
     const invoiceNumberElement = document.getElementById("invoice-number");
+    const paymentInfoInvoiceNumberElement = document.getElementById("payment-info-invoice-number");
     invoiceNumberElement.innerHTML = invoiceNumberString || "";
+    paymentInfoInvoiceNumberElement.innerHTML = invoiceNumberString || "";
 };
 
 /*-----------------------------*/
